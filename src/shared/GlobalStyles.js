@@ -33,10 +33,9 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    color: #fff;
+    color: black;
     overflow-x: hidden;
-    background-color: #141518;
-    font-family: 'paybooc-Bold';
+    background-color: white;
   }
 
   ol, ul, li {
