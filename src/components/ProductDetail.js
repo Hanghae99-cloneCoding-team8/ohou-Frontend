@@ -106,7 +106,7 @@ const Wrap = styled.div`
     height: auto;
     display: block;
     max-width: 100% !important;
-  }import ProductDetail from './ProductDetail';
+  }
 
   .product-selling-detail-sidebar {
     padding: 0px 10px;
