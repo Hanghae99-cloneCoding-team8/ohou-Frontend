@@ -21,7 +21,7 @@ const ProductDetail = (props) => {
           <div className="product-selling-detail">
               <div>
                 <center>
-                    
+                    <img alt="" src=""/>
                 </center>
               </div>
           </div>
@@ -55,7 +55,10 @@ const ProductDetail = (props) => {
                     L
                 </option>
                 </select>
-                <toggleLogo/>
+                <span>
+                    <toggleLogo className="toggle-button"/>
+                </span>
+               
               </div>
           </div>
         </Grid>
@@ -68,6 +71,7 @@ const NavBar = styled.div`
   background-color: rgb(250, 250, 250);
   border-top: 1px solid rgb(237, 237, 237);
   border-bottom: 1px solid rgb(237, 237, 237);
+  
   .navbar {
     align-items: left;
 
@@ -99,6 +103,17 @@ const NavBar = styled.div`
   }
 `;
 const Wrap = styled.div`
+
+.toggle-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    font-size: 0;
+    cursor: default;
+    color: rgba(0,0,0,.3);
+    pointer-events: none;
+  }
     
   .product-selling-detail {
     width: 770px;
@@ -106,7 +121,7 @@ const Wrap = styled.div`
     height: auto;
     display: block;
     max-width: 100% !important;
-  }import ProductDetail from './ProductDetail';
+  }
 
   .product-selling-detail-sidebar {
     padding: 0px 10px;
@@ -122,8 +137,8 @@ const Wrap = styled.div`
       margin-bottom: 10px;
       width: 300px;
       height: 40px;
-      .focus{
-        border-color: rgb(53, 197, 240);
+      .focused{
+        color: #35c5f0;
       }
    
   }
