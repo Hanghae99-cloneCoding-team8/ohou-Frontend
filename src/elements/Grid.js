@@ -22,7 +22,7 @@ Grid.defaultProps = {
   flex_justify: false,
 };
 const GridBox = styled.div`
-  ${(props) => props.is_container && `max-width: 1129px; margin: 0 auto;`}
+  ${(props) => props.is_container && `max-width: 1192px; margin: 0 auto;`}
   ${(props) => props.is_flex && `display: flex;`}
   ${(props) => props.flex_align && `align-items: ${props.flex_align};`} 
   ${(props) => props.flex_justify && `justify-contents: ${props.flex_justify};`}
