@@ -4,6 +4,7 @@ import GlobalStyles from './GlobalStyles';
 import Header from '../components/Header';
 import ProductDetail from '../components/ProductDetail';
 import Main from '../pages/Main';
+import PostDetail from '../pages/PostDetail';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Header/>
       <Route path='/detail' component={ProductDetail} exact="exact"/>
       <Route path='/' component={Main} exact="exact"/>
+      <Route path='/postdetail' component={PostDetail} exact="exact"/>
     </div>
   );
 }
