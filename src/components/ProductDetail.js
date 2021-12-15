@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Comment from "./Comment"
 
 
 
@@ -62,6 +63,7 @@ const ProductDetail = (props) => {
           </div>
         
       </Wrap>
+      <Comment/>
     </>
   );
 };
@@ -140,7 +142,7 @@ const Wrap = styled.div`
   .temp-btn{
     
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     
     color: white;
     text-align: center;
