@@ -1,15 +1,23 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { BsCart } from 'react-icons/bs';
+import logo from '../static/logo.svg'
+import Grid from '../elements/Grid'
 
-import { BsCart } from "react-icons/bs";
+
+
+
 
 const Header = () => {
   return (
     <React.Fragment>
       <HeaderBox>
         <div className="inside-box">
-          <div class="navbar_logo">logo</div>
-
+          <div className='navbar-logo-wrap'>
+                        <a class='navbar-logo' href='/'>
+                            <img src={logo} alt=''/>
+                        </a>
+                        </div>  
           <MenuItemBox>
             <li className="menu-item">커뮤니티</li>
             <li className="menu-item">스토어</li>
@@ -41,6 +49,12 @@ const HeaderBox = styled.div`
     align-items: center;
     padding: 10px 60px;
     margin: 0px 55.3px;
+    .navbar-logo-wrap{
+         width: 74px;
+        height: 30px;
+            .navbar-logo{
+            }
+    }
   }
   .icon-box {
     padding: 4px;
@@ -57,6 +71,7 @@ const HeaderBox = styled.div`
   }
 `;
 
+
 const MenuItemBox = styled.div`
   display: block;
 
@@ -72,6 +87,7 @@ const MenuItemBox = styled.div`
     cursor: pointer;
     &:hover {
       color: #35c5f0;
+
     }
   }
 

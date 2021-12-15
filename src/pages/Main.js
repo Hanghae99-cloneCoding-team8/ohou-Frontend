@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import image from '../static/1.jpg'
 import Grid from '../elements/Grid'
 import Noimg from '../static/no-image.png'
+import Toimg from '../static/오늘의딜1.PNG'
+import Yoimg from '../static/오늘의딜2.PNG'
 import SwiperSlice from "../components/SwiperSlice"
 
 const Main = () => {
@@ -64,14 +66,14 @@ const Main = () => {
                 </div>
                 <Grid is_container="is_container">
                     <div className='today-deal-header'>
-                        <h1>오늘의 딜</h1>
+                        <text>오늘의 딜</text>
                     </div>
 
                     <div className='today-deal-wrap'>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
+                        <img src={Toimg} alt=''/>
+                        <img src={Toimg} alt=''/>
+                        <img src={Toimg} alt=''/>
+                        <img src={Toimg} alt=''/>
                     </div>
 
                     <div className='category-header'>
@@ -81,7 +83,7 @@ const Main = () => {
                         <div className='category-item-wrap'>
                             <a>
                                 <div className='catecory-item'>
-                                    <img src={Noimg} alt=''/>
+                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163654148296283533.png?gif=1&w=144&h=144&c=c'} alt=''/>
                                     <div className='category-title'>크리스마스</div>
                                 </div>
                             </a>
@@ -89,7 +91,7 @@ const Main = () => {
                         <div className='category-item-wrap'>
                             <a>
                                 <div className='catecory-item'>
-                                    <img src={Noimg} alt=''/>
+                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163572945028172903.png?gif=1&w=144&h=144&c=c'} alt=''/>
                                     <div className='category-title'>겨울용품</div>
                                 </div>
                             </a>
@@ -97,15 +99,15 @@ const Main = () => {
                         <div className='category-item-wrap'>
                             <a>
                                 <div className='catecory-item'>
-                                    <img src={Noimg} alt=''/>
-                                    <div className='category-title'>가구</div>
+                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163575474448469686.png?gif=1&w=144&h=144&c=c'} alt=''/>
+                                    <div className='category-title'>생필품</div>
                                 </div>
                             </a>
                         </div>
                         <div className='category-item-wrap'>
-                            <a href="href">
+                            <a>
                                 <div className='catecory-item'>
-                                    <img src={Noimg} alt=''/>
+                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/162823225115177697.png?gif=1&w=144&h=144&c=c'} alt=''/>
                                     <div className='category-title'>패브릭</div>
                                 </div>
                             </a>
@@ -113,27 +115,27 @@ const Main = () => {
                         <div className='category-item-wrap'>
                             <a>
                                 <div className='catecory-item'>
-                                    <img src={Noimg} alt=''/>
-                                    <div className='category-title'>애견용품</div>
+                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/162823231401891024.png?gif=1&w=144&h=144&c=c'} alt=''/>
+                                    <div className='category-title'>반려동물</div>
                                 </div>
                             </a>
                         </div>
                     </div>
                     <div className='category-posts'>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
-                        <img src={Noimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
+                        <img src={Yoimg} alt=''/>
                     </div>
                 </Grid>
             </Grid>
@@ -201,8 +203,9 @@ const MainWrap = styled.section `
     .today-deal-header{
         display: flex;
         margin-bottom: 20px;
-        h1{
-            text-align: left;
+        text{
+            font-size: 30px;
+            text-align: left; 
         }
     }
     .today-deal-wrap{
