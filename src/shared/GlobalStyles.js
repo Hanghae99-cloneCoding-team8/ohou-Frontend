@@ -26,7 +26,10 @@ const GlobalStyles = createGlobalStyle`
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
+  }
+
+
+
 
   * {
     margin: 0;

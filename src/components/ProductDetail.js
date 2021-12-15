@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Grid from "../elements/Grid";
 import "bootstrap/dist/css/bootstrap.min.css";
-import toggleLogo from "../static/toggleLogo.svg";
 
 const ProductDetail = (props) => {
   return (

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { BsCart } from 'react-icons/bs';
+import logo from '../static/logo.svg'
+import Grid from '../elements/Grid'
 
 
 
@@ -10,10 +11,14 @@ import { BsCart } from 'react-icons/bs';
 const Header = () => {
 
     return (
+        <Grid is_container='is_container'>
                <React.Fragment>
-                     <HeaderBox>
-                        <div class='navbar_logo'>logo</div>
-                        
+                     <HeaderBox>                       
+                         <div className='navbar-logo-wrap'>
+                        <a class='navbar-logo' href='/'>
+                            <img src={logo} alt=''/>
+                        </a>
+                        </div>
                         <MenuItemBox>
                             <li className="menu-item">커뮤니티</li>
                             <li className="menu-item">스토어</li>
@@ -22,38 +27,37 @@ const Header = () => {
 
                         <div className="icon-box" size="lg">
                             <BsCart style={{ fontSize: '22px',fontWeight:"700" }}/>
-                        </div>
-                    
+                        </div>                    
                      </HeaderBox>
                      <div style={{border: "1px solid #e6e4e1"}}></div>
                </React.Fragment> 
-               
-                   
-
+               </Grid>
     );
 };
 const HeaderBox = styled.div`
  display : flex;
  justify-content : space-between;
  align-items: center;
- padding : 10px 60px;
- margin: 0px 55.3px;
- 
-
- .icon-box {
-     padding: 4px;
-     border : 1px solid white;
-     background-color: white;
-     width:33px;
-     height:33px;
-     border-radius:20px;
-     cursor : pointer;
-    &:hover {
+    .navbar-logo-wrap{
+         width: 74px;
+        height: 30px;
+            .navbar-logo{
+            }
+    }
+    .icon-box {
+        padding: 4px;
+        border : 1px solid white;
+        background-color: white;
+        width:33px;
+        height:33px;
+        border-radius:20px;
+        cursor : pointer;
+        &:hover {
         background-color: #35c5f0;
         color: white;
     }
  }
-`;
+`
 
 const MenuItemBox = styled.div`
  display : block;
@@ -70,6 +74,7 @@ const MenuItemBox = styled.div`
     cursor: pointer;
     &:hover {
         color: #35c5f0;
+    
     }
     
  }
