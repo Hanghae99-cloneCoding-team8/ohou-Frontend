@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Grid from "../elements/Grid";
-import "bootstrap/dist/css/bootstrap.min.css";
-import toggleLogo from "../static/toggleLogo.svg";
+
+
 
 const ProductDetail = (props) => {
   return (
@@ -16,65 +15,67 @@ const ProductDetail = (props) => {
           <li className="nav-item">추천</li>
         </div>
       </NavBar>
+
       <Wrap>
-        <Grid is_flex is_container>
           <div className="product-selling-detail">
-              <div>
-                <center>
-                    <img alt="" src=""/>
-                </center>
-              </div>
+            <div>
+              <p>
+                  <img alt="" src="https://exit.ohou.se/bd5b6a20646852927da17d0a7d52df9bd5c8f826/basictone.co.kr/web/upload/detail/211011_raschel/som_test_01.jpg"/>
+              </p>
+            </div>
           </div>
+
           <div className="product-selling-detail-sidebar">
+            <div>
+              <select class="dropdown">
+                <option value="" disabled="">
+                  컬러
+                </option>
+                <option value="0">빨강</option>
+                <option value="1">파랑</option>
+                <option value="2">노랑</option>
+              </select>
+              <select class="dropdown">
+                <option value="" disabled="">
+                  사이즈
+                </option>
+                <option value="0">S</option>
+                <option value="1">M</option>
+                <option value="2">L</option>
+              </select>
+            </div>
+
+            
+            <div className="temp-price" style={{display:"flex" ,justifyContent:"space-between"}}>
+              주문금액 
+
               <div>
-                <select class="dropdown">
-                <option value="" disabled="">
-                    컬러
-                </option>
-                <option value="0">
-                    빨강
-                </option>
-                <option value="1">
-                    파랑
-                </option>
-                <option value="2">
-                    노랑
-                </option>
-                </select>
-                <select class="dropdown">
-                <option value="" disabled="">
-                    사이즈
-                </option>
-                <option value="0">
-                    S
-                </option>
-                <option value="1">
-                    M
-                </option>
-                <option value="2">
-                    L
-                </option>
-                </select>
-                <span>
-                    <toggleLogo className="toggle-button"/>
-                </span>
-               
+                <h3>{props.price} 원</h3>
               </div>
+              
+            </div>
+            <div className="temp-btn">
+              <button className="button-1">장바구니</button>  
+              <button className="button-2">바로구매</button>
+            </div>
+            
           </div>
-        </Grid>
+        
       </Wrap>
     </>
   );
 };
 
 const NavBar = styled.div`
+  margin-top:20px;
   background-color: rgb(250, 250, 250);
   border-top: 1px solid rgb(237, 237, 237);
   border-bottom: 1px solid rgb(237, 237, 237);
+
   
+
   .navbar {
     align-items: left;
-
     display: block;
     width: 66.6666%;
     display: flex;
@@ -102,46 +103,96 @@ const NavBar = styled.div`
     }
   }
 `;
-const Wrap = styled.div`
 
-.toggle-button{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px;
-    font-size: 0;
-    cursor: default;
-    color: rgba(0,0,0,.3);
-    pointer-events: none;
-  }
-    
+const Wrap = styled.div`
+  display: flex;
+  height : auto;
+  margin:0 15%;
+  
+
   .product-selling-detail {
-    width: 770px;
-    padding: 0px 10px;
+    
+    width: 1500px;
+    padding: 0px 20px;
     height: auto;
     display: block;
-    max-width: 100% !important;
+    /* max-width: 100% !important; */
   }
+
+  .product-selling-detail img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+
+  }
+
+  .temp-price {
+    position: fixed;
+    bottom: 0;
+    width:250px;
+    color: black;
+    text-align: center;
+    margin-bottom:70px;
+  }
+  .temp-price  {
+    text-align: right !important;
+  }
+  .temp-btn{
+    
+    position: fixed;
+    bottom: 0;
+    
+    color: white;
+    text-align: center;
+  }
+  .button-1{
+    padding : 13px 10px 14px; 
+    width: 116px;
+    height: 55px;
+    margin: 10px 20px 10px 0px;
+    background-color: white;
+    border: 1px solid #35c5f0;
+    border-radius:5px;
+    color : #35c5f0;
+    cursor:pointer;
+    font-weight: 700;
+    font-size:1.1em;
+  }
+  .button-2{
+    font-size:1.1em;
+    font-weight: 700;
+    cursor:pointer;
+    border-radius:5px;
+    color:#fff;
+    border: 1px solid transparent;
+    background-color: #35c5f0;
+    padding : 13px 10px 14px; 
+    width: 116px;
+    height: 55px;
+  }
+
 
   .product-selling-detail-sidebar {
-    padding: 0px 10px;
-    position: fixed;
+    padding: 20px 30px;
+    position:sticky;
     box-sizing: border-box;
-    height: 911.674px;
-    width: 365.33px;
-    top: 136.326px;
+    top:0px;
+    height:503px
   }
   .dropdown {
-      
-      padding : 0px 30px 0px 15px;
-      margin-bottom: 10px;
-      width: 300px;
-      height: 40px;
-      .focused{
-        color: #35c5f0;
-      }
-   
+    padding: 0px 30px 0px 15px;
+    margin-bottom: 10px;
+    width: 20vw;
+    height: 40px;
+    .focus {
+      outline: none;
+      color: #35c5f0;
+    }
   }
 `;
-
+ProductDetail.defaultProps ={
+  images : "",
+  price : "57000",
+   
+}
 export default ProductDetail;
