@@ -21,7 +21,7 @@ function App() {
       <Route path='/detail' component={ProductDetail} exact="exact"/>
       <Route path='/comment' component={Comment} exact="exact"/>
       <Route path='/login' component={Login} exact="exact"/>
-      <Route path='/signup' component={SignUp} exact="exact"/>
+      
       <Route path='/post' component={PostItem} exact="exact"/>
       <Route path='/postdetail' component={PostDetail} exact="exact"/>
       <Footer/>

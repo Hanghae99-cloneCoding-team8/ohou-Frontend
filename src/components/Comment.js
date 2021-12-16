@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 const Comment = () => {
     return (
+        <Grid is_container="is_container">
         <ReviewWrap>
-            <Grid is_container="is_container">
+            
                 <div className='comment-wrap'>
                     <div className='review-header'>
                         <h4>상품 리뷰</h4>
@@ -143,8 +144,9 @@ const Comment = () => {
 
                 </div>
 
-            </Grid>
+            
         </ReviewWrap>
+        </Grid>
     );
 };
 
@@ -152,6 +154,8 @@ export default Comment;
 
 const ReviewWrap = styled.div `
     margin-top: 30px;
+    max-width: 800px;
+    padding-right:100px;
     .comment-wrap{
         .review-header{
             display: flex;
@@ -168,6 +172,7 @@ const ReviewWrap = styled.div `
                     border-radius: 10px;
                     border: 1px solid #bbb;
                     padding: 3px 5px ;
+                    margin-bottom:20px;
                 }
                 input:focus {outline:none}
             }
@@ -206,10 +211,14 @@ const ReviewWrap = styled.div `
                 }
             }
             .comment-write-wrap{
-                .commet-write-title{
-                    .user-commet-wrap{
-                        .usertime{
-                        display: flex;
+                    margin-bottom:50px;
+                    .commet-write-title{
+                        
+                            .user-commet-wrap{
+                                
+                                    .usertime{
+                                            margin-bottom: 20px;
+                                             display: flex;
                         }
                     }
                 }

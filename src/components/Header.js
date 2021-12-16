@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsCart } from 'react-icons/bs';
 import logo from '../static/logo.svg'
-import Grid from '../elements/Grid'
+import {history} from '../redux/configureStore';
+
 
 
 
 
 
 const Header = () => {
+
+
   return (
     <React.Fragment>
       <HeaderBox>
@@ -19,7 +22,7 @@ const Header = () => {
                         </a>
                         </div>  
           <MenuItemBox>
-            <li className="menu-item">커뮤니티</li>
+            <li className="menu-item" onClick={()=>{history.push('/login')}}>커뮤니티</li>
             <li className="menu-item">스토어</li>
             <li className="menu-item">인테리어시공</li>
           </MenuItemBox>
@@ -33,6 +36,7 @@ const Header = () => {
   );
 };
 const HeaderBox = styled.div`
+  
   position: sticky;
   display: flex;
   top: 0;
@@ -41,13 +45,13 @@ const HeaderBox = styled.div`
   background-color: #fff;
   border-bottom: 1px solid #ededed;
   z-index: 502;
+  justify-content:center;
 
   .inside-box {
     display: flex;
-    width: 100%;
+    width: 1180px;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 60px;
+    padding: 10px 0px 10px 0px;
     margin: 0px 55.3px;
     .navbar-logo-wrap{
          width: 74px;
