@@ -81,7 +81,7 @@ const Main = () => {
                     </div>
                     <div className='category-wrap'>
                         <div className='category-item-wrap'>
-                            <a>
+                            <a >
                                 <div className='catecory-item'>
                                     <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163654148296283533.png?gif=1&w=144&h=144&c=c'} alt=''/>
                                     <div className='category-title'>크리스마스</div>
@@ -122,7 +122,9 @@ const Main = () => {
                         </div>
                     </div>
                     <div className='category-posts'>
+                        <a href="/postdetail">
                         <img src={Yoimg} alt=''/>
+                        </a>
                         <img src={Yoimg} alt=''/>
                         <img src={Yoimg} alt=''/>
                         <img src={Yoimg} alt=''/>
@@ -239,10 +241,13 @@ const MainWrap = styled.section `
     .category-posts{
         display: flex;
         flex-wrap: wrap;
-        img{
-            width: 25%;
+        a{
+            img{
+            width: 100%;
             height: 416px;
         }
-    }
+     }
+       
+}
     
 `

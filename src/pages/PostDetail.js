@@ -7,19 +7,21 @@ import axios from "axios";
 const PostDetail = () => {
   const [itemDetail, setDetail] = useState({});
   const [imgIdx, setImgIdx] = useState(0);
+  const [colorIdx, setColorIdx] = useState([]);
+  const [sizeIdx, setSizeIdx] = useState([]);
+
 
   // const productId= params.match.id
 
   const getProductDetail = () => {
-    axios.get("http://3.37.61.109/api/products/32").then((response) => {
+    axios.get("http://3.37.61.109/api/products/20").then((response) => {
       setDetail(response.data);
-      console.log(response.data.imges);
     });
   };
   React.useEffect(() => {
     getProductDetail();
-  }, []);
-
+  },[]);
+  
   //argument ,parameter
 
   return (
@@ -30,7 +32,6 @@ const PostDetail = () => {
             <div>
               {itemDetail.images &&
                 itemDetail.images.map((i, idx) => {
-                  console.log(itemDetail);
                   return (
                     <div
                       key={itemDetail.id}
@@ -54,7 +55,6 @@ const PostDetail = () => {
         <div className="item-content">
           <div className="item-content-overview">
             <div className="item-content-company">{itemDetail.brandName}</div>
-
             <div className="item-content-name">{itemDetail.title}</div>
             <div className="item-content-review">
               {/* //리뷰갯수받아오기 */}
@@ -67,7 +67,7 @@ const PostDetail = () => {
                 <span>%</span>
               </div>
               <div className="item-price">
-                <span>{itemDetail.price}원</span>
+                <span>{(itemDetail.price)?.toLocaleString()}원</span>
               </div>
 
               <div className="item-delivery-info">
@@ -89,31 +89,55 @@ const PostDetail = () => {
                   display: "flex",
                   flexDirection: "column",
                   width: "100%",
-                }}
-              >
-                 console.log(itemDetail.option[0].detail);
-                <select style={{ padding: "10px", margin: "8px" }}>
-                  <option value="" disabled="">
-                    {/* {itemDetail.option[0].detail} */}
-                  </option>
-                  <option value="0">빨강</option>
-                  <option value="1">파랑</option>
-                  <option value="2">노랑</option>
-                </select>
-                <select style={{ padding: "10px", margin: "8px" }}>
-                  <option value="" disabled="">
-                    사이즈
-                  </option>
-                  <option value="0">S</option>
-                  <option value="1">M</option>
-                  <option value="2">L</option>
-                </select>
+                }} >
+                  {itemDetail.option && (
+                    <select
+                    onChange={(e)=>{setColorIdx(e.target.value)
+                    console.log(e.target.value);}}
+                    className="selectbox-option"
+                    >
+                      <option value="" disabled >컬러</option>
+                      {itemDetail.option[0].detail.map((color, idx) => {
+                        return (
+                          <option key={idx+"color"} value={color} name="color" >
+                            {color}
+                          </option>
+                          );
+                      })}
+                    </select>
+                  )}
+                  
+                  {itemDetail.option && (
+                    <select
+                    onChange={(e)=>{setSizeIdx(e.target.value)
+                    console.log(e.target.value);}}
+                    className="selectbox-option"
+                      >
+                      <option value="" disabled>사이즈</option>
+                      {itemDetail.option[1].detail.map((size, idx) => {
+                        
+                        return (
+                          <option key={idx+"size"} value={size} name="size" >
+                            {size}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  )}
+                  {itemDetail.option && (
+                    <div className="order-info-box">
+                        <div>
+                          <span>컬러 : {colorIdx}  / 
+                            사이즈: {sizeIdx}</span>
+                        </div>
+                    </div>
+                  )}
               </div>
 
               <div className="option-price-box">
                 <span>주문금액</span>
                 <div className="price-final">
-                  <span>{itemDetail.price}</span>원
+                  <span>{(itemDetail.price)?.toLocaleString()}</span>원
                 </div>
               </div>
               <div className="item-buy-option">
@@ -169,6 +193,17 @@ const PostDetails = styled.div`
   }
   .item-content {
     width: 437px;
+    .option-box{
+      .selectbox-option{
+        padding: 10px;
+        margin: 8px;
+      }
+    }
+    .order-info-box{
+      margin-bottom : 8px;
+      padding :10px;
+      background-color: #f5f5f5;
+    }
   }
 
   .item-content-overview {
