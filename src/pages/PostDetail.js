@@ -9,15 +9,17 @@ const PostDetail = (props) => {
   const [imgIdx, setImgIdx] = useState(0);
   const [colorIdx, setColorIdx] = useState();
   const [sizeIdx, setSizeIdx] = useState();
-
+  
   const productsId = props.match.params.id;
-  const store = {
+  const store = [{
     brandName: `${itemDetail.brandName}`,
     title: `${itemDetail.title}`,
     price: itemDetail.price && `${(itemDetail.price).toLocaleString()}`,
     color: `${colorIdx}`,
     size: `${sizeIdx}`,
-  };
+  }];
+
+
   const setStorageItem = (name, item) => {
     localStorage.setItem(name, JSON.stringify(item));
   };
@@ -33,7 +35,6 @@ const PostDetail = (props) => {
     getProductDetail();
   }, []);
 
-  //argument ,parameter
 
   return (
     <>
@@ -163,7 +164,7 @@ const PostDetail = (props) => {
               </div>
               <div className="item-buy-option">
                 <button
-                  onClick={() => setStorageItem("store", store)}
+                  onClick={() => ( colorIdx && sizeIdx ? setStorageItem(`${productsId}`, store): alert("옵션 선택후에 버튼을 클릭해 주세요.") )}
                   className="cart"
                 >
                   장바구니
