@@ -10,22 +10,34 @@ import Footer from '../components/Footer';
 import PostItem from '../components/PostItem';
 import PostDetail from '../pages/PostDetail';
 
+const showHeader = ({pathname})=> {
+  if(pathname === './login' || pathname ==='./signup'){
+    return false
+  }else {
+    return true
+  }
+}
 
 function App() {
-  return (
-    <div className="App">
-      <GlobalStyles/>
-      <Header/>
-      <Route path='/' component={Main} exact="exact"/>
 
+  const location = useLocation()
+
+  return (
+
+    <>
+    {
+      showHeader(location) && (<><Header/></>)
+    }
+      <GlobalStyles/>
+      
+      <Route path='/' component={Main} exact="exact"/>
       <Route path='/detail' component={ProductDetail} exact="exact"/>
       <Route path='/comment' component={Comment} exact="exact"/>
       <Route path='/login' component={Login} exact="exact"/>
-      
       <Route path='/post' component={PostItem} exact="exact"/>
-      <Route path='/postdetail' component={PostDetail} exact="exact"/>
+      <Route path='/products/:id' component={PostDetail} exact="exact"/>
       <Footer/>
-    </div>
+    </>
   );
 }
 

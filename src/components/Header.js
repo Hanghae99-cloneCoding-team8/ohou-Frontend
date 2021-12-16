@@ -2,18 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsCart } from 'react-icons/bs';
 import logo from '../static/logo.svg'
-import {history} from '../redux/configureStore';
-
-
+import { history } from '../redux/configureStore'
 
 
 
 
 const Header = () => {
 
-
   return (
-    <React.Fragment>
+    
+    
       <HeaderBox>
         <div className="inside-box">
           <div className='navbar-logo-wrap'>
@@ -22,21 +20,27 @@ const Header = () => {
                         </a>
                         </div>  
           <MenuItemBox>
-            <li className="menu-item" onClick={()=>{history.push('/login')}}>커뮤니티</li>
+            <li className="menu-item">커뮤니티</li>
             <li className="menu-item">스토어</li>
             <li className="menu-item">인테리어시공</li>
           </MenuItemBox>
 
-          <div className="icon-box" size="lg">
+          <div className='icon-login-wrap'>
+          <div className="icon-box">
             <BsCart style={{ fontSize: "22px", fontWeight: "700" }} />
+          </div>  
+          <div className='login-signup-wrap'>
+            <li onClick={()=> history.push('/login')}>로그인</li>
+            <div className='line'/>
+            <li onClick={()=> history.push('/signup')}>회원가입</li>
+            </div>
           </div>
+           
         </div>
       </HeaderBox>
-    </React.Fragment>
   );
 };
 const HeaderBox = styled.div`
-  
   position: sticky;
   display: flex;
   top: 0;
@@ -45,7 +49,7 @@ const HeaderBox = styled.div`
   background-color: #fff;
   border-bottom: 1px solid #ededed;
   z-index: 502;
-  justify-content:center;
+  justify-content: center;
 
   .inside-box {
     display: flex;
@@ -53,6 +57,7 @@ const HeaderBox = styled.div`
     justify-content: space-between;
     padding: 10px 0px 10px 0px;
     margin: 0px 55.3px;
+    align-items: center;
     .navbar-logo-wrap{
          width: 74px;
         height: 30px;
@@ -60,19 +65,45 @@ const HeaderBox = styled.div`
             }
     }
   }
+.icon-login-wrap{
+  display: flex;
+  align-items: center;
   .icon-box {
+    display: flex;
     padding: 4px;
     border: 1px solid white;
     background-color: white;
     width: 33px;
     height: 33px;
     border-radius: 20px;
+    margin-right: 30px;
     cursor: pointer;
     &:hover {
       background-color: #35c5f0;
       color: white;
+    } 
+  }
+  .login-signup-wrap{
+      display: flex;
+      align-items: center;
+    li{
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;  
+      &:hover {
+        color: #35c5f0;
+    } 
+    }
+}
+  
+    .line{
+      height: 15px;
+      width: 1px;
+      background-color: #757575;
+      margin: 0px 5px 0px 5px;
     }
   }
+  
 `;
 
 
@@ -101,3 +132,4 @@ const MenuItemBox = styled.div`
 `;
 
 export default Header;
+

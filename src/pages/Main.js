@@ -1,13 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import image from '../static/1.jpg'
 import Grid from '../elements/Grid'
-import Noimg from '../static/no-image.png'
-import Toimg from '../static/오늘의딜1.PNG'
-import Yoimg from '../static/오늘의딜2.PNG'
 import SwiperSlice from "../components/SwiperSlice"
+import axios from 'axios';
+import PostItem from '../components/PostItem'
+import {history} from "../redux/configureStore";
 
-const Main = () => {
+const Main = (props) => {
+
+    const [today_deal, setTodayDeal] = useState([])
+    const [post_list, setPostList] = useState([])
+
+    const getPost = () => {
+        axios
+            .get('http://3.37.61.109/api/products/todayDeal')
+            .then((response) => {
+                console.log(response.data)
+                setTodayDeal(response.data)
+            })
+        axios
+            .get('http://3.37.61.109/api/products?page=1&size=50')
+            .then((response) => {
+                setPostList(response.data)
+                console.log(response)
+            })
+    }
+    useEffect(() => {
+        getPost()
+    }, [])
 
     return (
         <MainWrap>
@@ -70,74 +90,106 @@ const Main = () => {
                     </div>
 
                     <div className='today-deal-wrap'>
-                        <img src={Toimg} alt=''/>
-                        <img src={Toimg} alt=''/>
-                        <img src={Toimg} alt=''/>
-                        <img src={Toimg} alt=''/>
+
+                        {
+                            today_deal.map((td, idx) => {
+                                return (                                          
+                                    <div className='today-deal-item' >
+                                        <PostItem key={td.id} {...td}/>
+                                    </div>
+                                )
+                            })
+                        }
+
                     </div>
 
                     <div className='category-header'>
                         <h1>카테고리</h1>
                     </div>
                     <div className='category-wrap'>
-                        <div className='category-item-wrap'>
-                            <a >
+                        <div className='category-item-wrap'  onClick={()=>{
+                                axios.get('http://3.37.61.109/api/products/categorys/CHRISTMAS?size=10&page=0').then((response)=>{
+                                        console.log(response.data)
+                                        setPostList(response.data)
+                                })
+                        }}>
                                 <div className='catecory-item'>
-                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163654148296283533.png?gif=1&w=144&h=144&c=c'} alt=''/>
+                                    <img
+                                        src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home' +
+                                                '_categories/163654148296283533.png?gif=1&w=144&h=144&c=c'}
+                                        alt=''/>
                                     <div className='category-title'>크리스마스</div>
                                 </div>
-                            </a>
                         </div>
-                        <div className='category-item-wrap'>
-                            <a>
+                        <div className='category-item-wrap'  onClick={()=>{
+                                axios.get('http://3.37.61.109/api/products/categorys/WINTER?size=10&page=0').then((response)=>{
+                                        console.log(response.data)
+                                        setPostList(response.data)
+                                })
+                        }}>
                                 <div className='catecory-item'>
-                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163572945028172903.png?gif=1&w=144&h=144&c=c'} alt=''/>
+                                    <img
+                                        src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home' +
+                                                '_categories/163572945028172903.png?gif=1&w=144&h=144&c=c'}
+                                        alt=''/>
                                     <div className='category-title'>겨울용품</div>
                                 </div>
-                            </a>
                         </div>
-                        <div className='category-item-wrap'>
-                            <a>
+                        <div className='category-item-wrap'  onClick={()=>{
+                                axios.get('http://3.37.61.109/api/products/categorys/NECESSITY?size=10&page=0').then((response)=>{
+                                        console.log(response.data)
+                                        setPostList(response.data)
+                                })
+                        }}>
                                 <div className='catecory-item'>
-                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/163575474448469686.png?gif=1&w=144&h=144&c=c'} alt=''/>
+                                    <img
+                                        src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home' +
+                                                '_categories/163575474448469686.png?gif=1&w=144&h=144&c=c'}
+                                        alt=''/>
                                     <div className='category-title'>생필품</div>
                                 </div>
-                            </a>
                         </div>
-                        <div className='category-item-wrap'>
-                            <a>
-                                <div className='catecory-item'>
-                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/162823225115177697.png?gif=1&w=144&h=144&c=c'} alt=''/>
+                        <div className='category-item-wrap'  onClick={()=>{
+                                axios.get('http://3.37.61.109/api/products/categorys/FABRIC?size=10&page=0').then((response)=>{
+                                        console.log(response.data)
+                                        setPostList(response.data)
+                                })
+                        }}>
+                                <div className='category-item'>
+                                    <img
+                                        src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home' +
+                                                '_categories/162823225115177697.png?gif=1&w=144&h=144&c=c'}
+                                        alt=''/>
                                     <div className='category-title'>패브릭</div>
                                 </div>
-                            </a>
                         </div>
-                        <div className='category-item-wrap'>
-                            <a>
+                        <div className='category-item-wrap'  onClick={()=>{
+                                axios.get('http://3.37.61.109/api/products/categorys/PET?size=10&page=0').then((response)=>{
+                                        console.log(response.data)
+                                        setPostList(response.data)
+                                })
+                        }}>
+                                                    
                                 <div className='catecory-item'>
-                                    <img src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home_categories/162823231401891024.png?gif=1&w=144&h=144&c=c'} alt=''/>
+                                    <img
+                                        src={'https://image.ohou.se/i/bucketplace-v2-development/uploads/category/store_home' +
+                                                '_categories/162823231401891024.png?gif=1&w=144&h=144&c=c'}
+                                        alt=''/>
                                     <div className='category-title'>반려동물</div>
                                 </div>
-                            </a>
                         </div>
                     </div>
                     <div className='category-posts'>
-                        <a href="/postdetail">
-                        <img src={Yoimg} alt=''/>
-                        </a>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
-                        <img src={Yoimg} alt=''/>
+                        {
+                            post_list.map((pl, idx) => {
+                                return (
+                                    <div className='post-list-item' onClick ={()=> {history.push(`/products/${pl.id}`);}}>
+                                        <PostItem key={pl.id} {...pl}/>
+                                    </div>
+                                )
+                            })
+                        }
+
                     </div>
                 </Grid>
             </Grid>
@@ -211,6 +263,9 @@ const MainWrap = styled.section `
         }
     }
     .today-deal-wrap{
+        .today-deal-item{
+            margin: 0 15px;
+        }
         display: flex;
         justify-content: space-between;
         img{
@@ -241,13 +296,10 @@ const MainWrap = styled.section `
     .category-posts{
         display: flex;
         flex-wrap: wrap;
-        a{
-            img{
-            width: 100%;
-            height: 416px;
+        .post-list-item{
+            width: 270px;
+            margin: 0 14px;
         }
-     }
-       
-}
+    }
     
 `
