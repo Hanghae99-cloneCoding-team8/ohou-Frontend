@@ -4,7 +4,6 @@ import Grid from '../elements/Grid'
 import SwiperSlice from "../components/SwiperSlice"
 import axios from 'axios';
 import PostItem from '../components/PostItem'
-import {history} from "../redux/configureStore";
 
 const Main = (props) => {
 
@@ -93,8 +92,8 @@ const Main = (props) => {
 
                         {
                             today_deal.map((td, idx) => {
-                                return (                                          
-                                    <div className='today-deal-item' >
+                                return (
+                                    <div className='today-deal-item'>
                                         <PostItem key={td.id} {...td}/>
                                     </div>
                                 )
@@ -183,9 +182,9 @@ const Main = (props) => {
                         {
                             post_list.map((pl, idx) => {
                                 return (
-                                    <div className='post-list-item' onClick ={()=> {history.push(`/products/${pl.id}`);}}>
+                                    <a className='post-list-item'>
                                         <PostItem key={pl.id} {...pl}/>
-                                    </div>
+                                    </a>
                                 )
                             })
                         }
@@ -283,6 +282,7 @@ const MainWrap = styled.section `
         display: flex;
         justify-content: space-between;
         .category-item-wrap{
+            cursor: pointer;
             .category-title{
                 text-align: center;
             }

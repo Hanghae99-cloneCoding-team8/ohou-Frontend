@@ -1,30 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Comment from "./Comment"
-import { useState } from "react";
-
-
-const ProductDetail = ({itemDetail}) => {
-  
-  const [colorIdx, setColorIdx] = useState();
-  const [sizeIdx, setSizeIdx] = useState();
-  
-  const store = [
-    {
-      brandName: `${itemDetail.brandName}`,
-      title: `${itemDetail.title}`,
-      price: itemDetail.price && `${itemDetail.price.toLocaleString()}`,
-      color: `${colorIdx}`,
-      size: `${sizeIdx}`,
-    },
-  ];
-
-  const setStorageItem = (name, item) => {
-    localStorage.setItem(name, JSON.stringify(item));
-  };
 
 
 
+const ProductDetail = (props) => {
   return (
     <>
       <NavBar>
@@ -40,105 +20,48 @@ const ProductDetail = ({itemDetail}) => {
       <Wrap>
           <div className="product-selling-detail">
             <div>
-            {itemDetail.details &&
-                itemDetail.details.map((i, idx) => {
-                  return (
-                    <div
-                      key={i.id}
-                      className="item-img">
-                      <img alt="상품이미지" src={i} />
-                    </div>
-                  );
-                })}
+              <p>
+                  <img alt="" src="https://exit.ohou.se/bd5b6a20646852927da17d0a7d52df9bd5c8f826/basictone.co.kr/web/upload/detail/211011_raschel/som_test_01.jpg"/>
+              </p>
             </div>
           </div>
 
           <div className="product-selling-detail-sidebar">
             <div>
-            <div className="option-box">
-              <div
-                style={{
-                  padding: "20px 20px",
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                }}
-              >
-                {itemDetail.option && (
-                  <select
-                    onChange={(e) => {
-                      setColorIdx(e.target.value);
-                      console.log(e.target.value);
-                    }}
-                    className="selectbox-option"
-                  >
-                    <option value="" disabled>
-                      컬러
-                    </option>
-                    {itemDetail.option[0].detail.map((color, idx) => {
-                      return (
-                        <option key={idx + "color"} value={color} name="color">
-                          {color}
-                        </option>
-                      );
-                    })}
-                  </select>
-                )}
-
-                {itemDetail.option && (
-                  <select
-                    type="select option"
-                    onChange={(e) => {
-                      setSizeIdx(e.target.value);
-                      console.log(e.target.value);
-                    }}
-                    className="selectbox-option"
-                  >
-                    <option value="" disabled>
-                      사이즈
-                    </option>
-                    {itemDetail.option[1].detail.map((size, idx) => {
-                      return (
-                        <option key={idx + "size"} value={size} name="size">
-                          {size}
-                        </option>
-                      );
-                    })}
-                  </select>
-                )}
-                {colorIdx && sizeIdx && (
-                  <div className="order-info-box">
-                    <div>
-                      <span className="order-info-text">
-                        컬러: {colorIdx} / 사이즈: {sizeIdx}
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </div>
+              <select class="dropdown">
+                <option value="" disabled="">
+                  컬러
+                </option>
+                <option value="0">빨강</option>
+                <option value="1">파랑</option>
+                <option value="2">노랑</option>
+              </select>
+              <select class="dropdown">
+                <option value="" disabled="">
+                  사이즈
+                </option>
+                <option value="0">S</option>
+                <option value="1">M</option>
+                <option value="2">L</option>
+              </select>
             </div>
 
             
-            <div className="price" style={{display:"flex" ,justifyContent:"space-between"}}>
+            <div className="temp-price" style={{display:"flex" ,justifyContent:"space-between"}}>
               주문금액 
 
               <div>
-                <h3>{itemDetail.price?.toLocaleString()}원</h3>
+                <h3>{props.price} 원</h3>
               </div>
               
             </div>
-            <div className="btn">
-              <button onClick={() =>
-                    colorIdx && sizeIdx
-                      ? setStorageItem(`${itemDetail.id}`, store)
-                      : alert("옵션 선택후에 버튼을 클릭해 주세요.")
-                  }
-                  className="cart-btn">장바구니</button>  
-              <button className="buy-btn">바로구매</button>
+            <div className="temp-btn">
+              <button className="button-1">장바구니</button>  
+              <button className="button-2">바로구매</button>
             </div>
             
           </div>
-        </div>
+        
       </Wrap>
       <Comment/>
     </>
@@ -146,15 +69,14 @@ const ProductDetail = ({itemDetail}) => {
 };
 
 const NavBar = styled.div`
-  margin:40px 0px;
+  margin-top:20px;
   background-color: rgb(250, 250, 250);
   border-top: 1px solid rgb(237, 237, 237);
   border-bottom: 1px solid rgb(237, 237, 237);
-  position:sticky;
-  top:80px;
+
+  
 
   .navbar {
-    
     align-items: left;
     display: block;
     width: 66.6666%;
@@ -206,49 +128,26 @@ const Wrap = styled.div`
 
   }
 
-  
-  .product-selling-detail-sidebar {
-    padding: 20px 30px;
-    position:sticky;
-    box-sizing: border-box;
-    top:0px;
-    height:581px;
-   
-    @media screen and (max-width: 1029px) {
-    display:none;
-    }
-    .price {
+  .temp-price {
     position: fixed;
     bottom: 0;
-    width:200px;
+    width:250px;
     color: black;
-    margin-bottom:70px; 
+    text-align: center;
+    margin-bottom:70px;
+  }
+  .temp-price  {
     text-align: right !important;
   }
-  .price  {
-    margin-bottom: 150px;
-    text-align: right !important;
-  }
- 
-  .order-info-box {
-      width: 285px;
-      margin: 8px 0px 8px 0px;
-      padding: 10px 10px;
-      background-color: #f5f5f5;
-      .order-info-text {
-        font-size: 13px;
-        line-height: 20px;
-        color: #424242;
-      }
-    }
-    .btn{
-      position: sticky;
-    width:280px;
+  .temp-btn{
+    
+    position: fixed;
     bottom: 0px;
-    margin-bottom: 50px;
+    
     color: white;
     text-align: center;
-    .cart-btn{
+  }
+  .button-1{
     padding : 13px 10px 14px; 
     width: 116px;
     height: 55px;
@@ -260,8 +159,8 @@ const Wrap = styled.div`
     cursor:pointer;
     font-weight: 700;
     font-size:1.1em;
-      }
-  .buy-btn{
+  }
+  .button-2{
     font-size:1.1em;
     font-weight: 700;
     cursor:pointer;
@@ -272,10 +171,17 @@ const Wrap = styled.div`
     padding : 13px 10px 14px; 
     width: 116px;
     height: 55px;
-      }
   }
- 
-  .selectbox-option {
+
+
+  .product-selling-detail-sidebar {
+    padding: 20px 30px;
+    position:sticky;
+    box-sizing: border-box;
+    top:0px;
+    height:503px
+  }
+  .dropdown {
     padding: 0px 30px 0px 15px;
     margin-bottom: 10px;
     width: 20vw;
@@ -283,10 +189,8 @@ const Wrap = styled.div`
     .focus {
       outline: none;
       color: #35c5f0;
-        }
-      }
+    }
   }
- 
 `;
 ProductDetail.defaultProps ={
   images : "",
