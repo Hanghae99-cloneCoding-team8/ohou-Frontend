@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import image from '../static/1.jpg'
 import Grid from '../elements/Grid'
-import Noimg from '../static/no-image.png'
-import Toimg from '../static/오늘의딜1.PNG'
-import Yoimg from '../static/오늘의딜2.PNG'
 import SwiperSlice from "../components/SwiperSlice"
 import axios from 'axios';
 import PostItem from '../components/PostItem'
+import {history} from "../redux/configureStore";
 
 const Main = (props) => {
 
@@ -96,8 +93,8 @@ const Main = (props) => {
 
                         {
                             today_deal.map((td, idx) => {
-                                return (
-                                    <div className='today-deal-item'>
+                                return (                                          
+                                    <div className='today-deal-item' >
                                         <PostItem key={td.id} {...td}/>
                                     </div>
                                 )
@@ -186,9 +183,9 @@ const Main = (props) => {
                         {
                             post_list.map((pl, idx) => {
                                 return (
-                                    <a className='post-list-item'>
+                                    <div className='post-list-item' onClick ={()=> {history.push(`/products/${pl.id}`);}}>
                                         <PostItem key={pl.id} {...pl}/>
-                                    </a>
+                                    </div>
                                 )
                             })
                         }

@@ -3,26 +3,47 @@ import styled from "styled-components";
 import ProductDetail from "../components/ProductDetail";
 import { useState } from "react";
 import axios from "axios";
+import Modal from "../shared/Modal";
 
-const PostDetail = () => {
+const PostDetail = (props) => {
   const [itemDetail, setDetail] = useState({});
   const [imgIdx, setImgIdx] = useState(0);
-  const [colorIdx, setColorIdx] = useState([]);
-  const [sizeIdx, setSizeIdx] = useState([]);
+  const [colorIdx, setColorIdx] = useState();
+  const [sizeIdx, setSizeIdx] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
 
+  const openModal = () => {
+    setModalVisible(true);
+  };
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
-  // const productId= params.match.id
+  const productsId = props.match.params.id;
+  const store = [
+    {
+      brandName: `${itemDetail.brandName}`,
+      title: `${itemDetail.title}`,
+      price: itemDetail.price && `${itemDetail.price.toLocaleString()}`,
+      color: `${colorIdx}`,
+      size: `${sizeIdx}`,
+    },
+  ];
+
+  const setStorageItem = (name, item) => {
+    localStorage.setItem(name, JSON.stringify(item));
+  };
 
   const getProductDetail = () => {
-    axios.get("http://3.37.61.109/api/products/20").then((response) => {
-      setDetail(response.data);
-    });
+    axios
+      .get(`http://3.37.61.109/api/products/${productsId}`)
+      .then((response) => {
+        setDetail(response.data);
+      });
   };
   React.useEffect(() => {
     getProductDetail();
-  },[]);
-  
-  //argument ,parameter
+  }, []);
 
   return (
     <>
@@ -67,7 +88,7 @@ const PostDetail = () => {
                 <span>%</span>
               </div>
               <div className="item-price">
-                <span>{(itemDetail.price)?.toLocaleString()}원</span>
+                <span>{itemDetail.price?.toLocaleString()}원</span>
               </div>
 
               <div className="item-delivery-info">
@@ -89,66 +110,96 @@ const PostDetail = () => {
                   display: "flex",
                   flexDirection: "column",
                   width: "100%",
-                }} >
-                  {itemDetail.option && (
-                    <select
-                    onChange={(e)=>{setColorIdx(e.target.value)
-                    console.log(e.target.value);}}
+                }}
+              >
+                {itemDetail.option && (
+                  <select
+                    onChange={(e) => {
+                      setColorIdx(e.target.value);
+                      console.log(e.target.value);
+                    }}
                     className="selectbox-option"
-                    >
-                      <option value="" disabled >컬러</option>
-                      {itemDetail.option[0].detail.map((color, idx) => {
-                        return (
-                          <option key={idx+"color"} value={color} name="color" >
-                            {color}
-                          </option>
-                          );
-                      })}
-                    </select>
-                  )}
-                  
-                  {itemDetail.option && (
-                    <select
-                    onChange={(e)=>{setSizeIdx(e.target.value)
-                    console.log(e.target.value);}}
+                  >
+                    <option value="" disabled>
+                      컬러
+                    </option>
+                    {itemDetail.option[0].detail.map((color, idx) => {
+                      return (
+                        <option key={idx + "color"} value={color} name="color">
+                          {color}
+                        </option>
+                      );
+                    })}
+                  </select>
+                )}
+
+                {itemDetail.option && (
+                  <select
+                    type="select option"
+                    onChange={(e) => {
+                      setSizeIdx(e.target.value);
+                      console.log(e.target.value);
+                    }}
                     className="selectbox-option"
-                      >
-                      <option value="" disabled>사이즈</option>
-                      {itemDetail.option[1].detail.map((size, idx) => {
-                        
-                        return (
-                          <option key={idx+"size"} value={size} name="size" >
-                            {size}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  )}
-                  {itemDetail.option && (
-                    <div className="order-info-box">
-                        <div>
-                          <span>컬러 : {colorIdx}  / 
-                            사이즈: {sizeIdx}</span>
-                        </div>
+                  >
+                    <option value="" disabled>
+                      사이즈
+                    </option>
+                    {itemDetail.option[1].detail.map((size, idx) => {
+                      return (
+                        <option key={idx + "size"} value={size} name="size">
+                          {size}
+                        </option>
+                      );
+                    })}
+                  </select>
+                )}
+                {colorIdx && sizeIdx && (
+                  <div className="order-info-box">
+                    <div>
+                      <span className="order-info-text">
+                        컬러: {colorIdx} / 사이즈: {sizeIdx}
+                      </span>
                     </div>
-                  )}
+                  </div>
+                )}
               </div>
 
               <div className="option-price-box">
                 <span>주문금액</span>
                 <div className="price-final">
-                  <span>{(itemDetail.price)?.toLocaleString()}</span>원
+                  <span>{itemDetail.price?.toLocaleString()}</span>원
                 </div>
               </div>
               <div className="item-buy-option">
-                <button className="cart">장바구니</button>
+                <button
+                  onClick={() =>
+                    colorIdx && sizeIdx
+                      ? setStorageItem(`${productsId}`, store) && { openModal }
+                      : alert("옵션 선택후에 버튼을 클릭해 주세요.")
+                  }
+                  className="cart"
+                >
+                  장바구니
+                </button>
+                {modalVisible && 
+                  <Modal
+                    visible={modalVisible}
+                    closable={true}
+                    maskClosable={true}
+                    onClose={closeModal}
+                  >
+                    장바구니에 상품을 담았습니다
+                  </Modal>
+                }
                 <button className="buy">바로구매</button>
               </div>
             </div>
           </div>
         </div>
       </PostDetails>
-      <ProductDetail />
+      
+      <ProductDetail itemDetail={itemDetail}/>
     </>
   );
 };
@@ -193,16 +244,23 @@ const PostDetails = styled.div`
   }
   .item-content {
     width: 437px;
-    .option-box{
-      .selectbox-option{
-        padding: 10px;
-        margin: 8px;
+    .option-box {
+      .selectbox-option {
+        width: 378px;
+        margin: 4px 0px 4px 10px;
+        padding: 8px 0px 8px 12px;
       }
     }
-    .order-info-box{
-      margin-bottom : 8px;
-      padding :10px;
+    .order-info-box {
+      width: 381px;
+      margin: 8px 0px 8px 8px;
+      padding: 10px 10px;
       background-color: #f5f5f5;
+      .order-info-text {
+        font-size: 13px;
+        line-height: 20px;
+        color: #424242;
+      }
     }
   }
 
@@ -306,7 +364,7 @@ const PostDetails = styled.div`
     button {
       width: 100%;
       height: 55px;
-      margin: 0px 10px 0px 10px;
+      margin: 0px 10px 40px 10px;
       padding: 13px 10px 14px;
       border-radius: 4px;
       background-color: transparent;
