@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsCart } from 'react-icons/bs';
 import logo from '../static/logo.svg'
-import Grid from '../elements/Grid'
 import { history } from '../redux/configureStore'
 
 
@@ -133,5 +132,4 @@ const MenuItemBox = styled.div`
 `;
 
 export default Header;
-
 

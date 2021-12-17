@@ -7,10 +7,12 @@ import {Provider} from "react-redux";
 import {ConnectedRouter} from "connected-react-router";
 import {history} from "./redux/configureStore";
 import store from "./redux/configureStore";
+import ScrollToTop from './shared/ScrollToTop';
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
+      <ScrollToTop/>
       <App />
     </ConnectedRouter>
   </Provider>,
