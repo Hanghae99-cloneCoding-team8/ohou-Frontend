@@ -11,9 +11,6 @@ const Comment = () => {
                     <div className='review-header'>
                         <h4>상품 리뷰</h4>
                         <div className='input-wrap'>
-                            <div className='input-id'>
-                                <input placeholder='아이디'/>
-                            </div >
                             <div className='input-pw'>
                                 <input placeholder='비밀번호'/>
                             </div>
@@ -165,9 +162,6 @@ const ReviewWrap = styled.div `
             }
             .input-wrap{
                 display: flex;
-                .input-id{
-                    margin-right: 20px;
-                }
                 input{
                     border-radius: 10px;
                     border: 1px solid #bbb;

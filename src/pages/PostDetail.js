@@ -3,22 +3,32 @@ import styled from "styled-components";
 import ProductDetail from "../components/ProductDetail";
 import { useState } from "react";
 import axios from "axios";
+import Modal from "../shared/Modal";
 
 const PostDetail = (props) => {
   const [itemDetail, setDetail] = useState({});
   const [imgIdx, setImgIdx] = useState(0);
   const [colorIdx, setColorIdx] = useState();
   const [sizeIdx, setSizeIdx] = useState();
-  
-  const productsId = props.match.params.id;
-  const store = [{
-    brandName: `${itemDetail.brandName}`,
-    title: `${itemDetail.title}`,
-    price: itemDetail.price && `${(itemDetail.price).toLocaleString()}`,
-    color: `${colorIdx}`,
-    size: `${sizeIdx}`,
-  }];
+  const [modalVisible, setModalVisible] = useState(false);
 
+  const openModal = () => {
+    setModalVisible(true);
+  };
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const productsId = props.match.params.id;
+  const store = [
+    {
+      brandName: `${itemDetail.brandName}`,
+      title: `${itemDetail.title}`,
+      price: itemDetail.price && `${itemDetail.price.toLocaleString()}`,
+      color: `${colorIdx}`,
+      size: `${sizeIdx}`,
+    },
+  ];
 
   const setStorageItem = (name, item) => {
     localStorage.setItem(name, JSON.stringify(item));
@@ -34,7 +44,6 @@ const PostDetail = (props) => {
   React.useEffect(() => {
     getProductDetail();
   }, []);
-
 
   return (
     <>
@@ -164,18 +173,33 @@ const PostDetail = (props) => {
               </div>
               <div className="item-buy-option">
                 <button
-                  onClick={() => ( colorIdx && sizeIdx ? setStorageItem(`${productsId}`, store): alert("옵션 선택후에 버튼을 클릭해 주세요.") )}
+                  onClick={() =>
+                    colorIdx && sizeIdx
+                      ? setStorageItem(`${productsId}`, store) && { openModal }
+                      : alert("옵션 선택후에 버튼을 클릭해 주세요.")
+                  }
                   className="cart"
                 >
                   장바구니
                 </button>
+                {modalVisible && 
+                  <Modal
+                    visible={modalVisible}
+                    closable={true}
+                    maskClosable={true}
+                    onClose={closeModal}
+                  >
+                    장바구니에 상품을 담았습니다
+                  </Modal>
+                }
                 <button className="buy">바로구매</button>
               </div>
             </div>
           </div>
         </div>
       </PostDetails>
-      <ProductDetail />
+      
+      <ProductDetail itemDetail={itemDetail}/>
     </>
   );
 };
@@ -340,7 +364,7 @@ const PostDetails = styled.div`
     button {
       width: 100%;
       height: 55px;
-      margin: 0px 10px 0px 10px;
+      margin: 0px 10px 40px 10px;
       padding: 13px 10px 14px;
       border-radius: 4px;
       background-color: transparent;
