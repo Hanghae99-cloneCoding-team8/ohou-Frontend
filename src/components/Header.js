@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsCart } from 'react-icons/bs';
 import logo from '../static/logo.svg'
+import Grid from '../elements/Grid'
 import { history } from '../redux/configureStore'
 
 
@@ -27,7 +28,7 @@ const Header = () => {
 
           <div className='icon-login-wrap'>
           <div className="icon-box">
-            <BsCart style={{ fontSize: "22px", fontWeight: "700" }} />
+            <BsCart onClick={()=> history.push('/cart')} style={{ fontSize: "22px", fontWeight: "700" }} />
           </div>  
           <div className='login-signup-wrap'>
             <li onClick={()=> history.push('/login')}>로그인</li>
@@ -132,4 +133,5 @@ const MenuItemBox = styled.div`
 `;
 
 export default Header;
+
 

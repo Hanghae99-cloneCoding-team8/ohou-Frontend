@@ -153,6 +153,7 @@ const ReviewWrap = styled.div `
     margin-top: 30px;
     max-width: 800px;
     padding-right:100px;
+    margin-left: 45px;
     .comment-wrap{
         .review-header{
             display: flex;
