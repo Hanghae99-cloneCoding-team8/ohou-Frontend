@@ -1,11 +1,13 @@
-import React,{useState} from 'react';
+
+import React, {useState} from 'react';
 import Grid from '../elements/Grid';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import {HiOutlinePencilAlt} from 'react-icons/hi'
+import Modal from 'react-modal'
+import PwBtn from './PwBtn';
 import { actionCreators as commentActions } from '../redux/modules/comment';
 
 const Comment = ({itemDetail}) => {
-
     const dispatch = useDispatch();
     const [content,setContent]= useState("");
     const [password,setPassword] = useState("");
@@ -14,15 +16,25 @@ const Comment = ({itemDetail}) => {
         dispatch(commentActions.addCommentAction(content,password,productId));
     };
     const productId = itemDetail.id
-    
+  
+  
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const openModal = () => {
+        setModalIsOpen(true)
+    }
+    const closeModal = () => {
+        setModalIsOpen(false)
+    }
+
 
     return (
         <Grid is_container="is_container">
-        <ReviewWrap>
-            
+            <ReviewWrap>
+
                 <div className='comment-wrap'>
                     <div className='review-header'>
                         <h4>상품 리뷰</h4>
+
                         <div className='input-wrap'>
                             <div className='input-pw'>
                                 <input placeholder='비밀번호' onChange ={(e) =>{setPassword(e.target.value);}}/>
@@ -42,19 +54,50 @@ const Comment = ({itemDetail}) => {
                         <div className='comment-write-title'>
                             <p>댓글1개</p>
                             <hr/>
-                            <div className='user-commet-wrap'>
-                                <div className='usertime'>
-                                    <text
+                            <div className='user-comment-wrap'>
+                                <div className='user-time-btn'>
+                                    <div className='usertime'>
+                                        <text
+                                            style={{
+                                                fontSize: '15px',
+                                                fontStyle: 'bold',
+                                                marginRight: "10px"
+                                            }}>username</text>
+                                        <text
+                                            style={{
+                                                fontSize: '10px'
+                                            }}>6시간전</text>
+                                    </div>
+
+                                    <HiOutlinePencilAlt
                                         style={{
-                                            fontSize: '15px',
-                                            fontStyle: 'bold',
-                                            marginRight: "10px"
-                                        }}>username</text>
-                                    <text
-                                        style={{
-                                            fontSize: '10px'
-                                        }}>6시간전</text>
+                                            cursor: 'pointer'
+                                        }}
+                                        onClick={openModal}/> {
+                                        modalIsOpen && 
+                                        <Modal isOpen={modalIsOpen} style={{content: { 
+                                            border: "1px solid black", 
+                                            borderRadius: "20px", 
+                                            left: "63em", 
+                                            right: "10em", 
+                                            top: "50em", 
+                                            bottom: "1.3em",
+                            
+                                             }, overlay:{
+                                                backgroundColor:'none'
+                                            },}}>
+                                               <div className='pw-bnb' style={{display:"flex", justifyContent:"space-between"}}> <PwBtn/>
+                                                    <HiOutlinePencilAlt
+                                                        style={{
+                                                            cursor: 'pointer'
+                                                        }}
+                                                        onClick={closeModal}/>  </div>                                              
+                                            </Modal>
+                                    }
+
                                 </div>
+
+
                                 <div className='user-comment'>
                                     <text>망한집입니다</text>
                                 </div>
@@ -65,8 +108,7 @@ const Comment = ({itemDetail}) => {
 
                 </div>
 
-            
-        </ReviewWrap>
+            </ReviewWrap>
         </Grid>
     );
 };
@@ -74,30 +116,26 @@ const Comment = ({itemDetail}) => {
 export default Comment;
 
 const ReviewWrap = styled.div `
+
     margin-top: 30px;
     max-width: 800px;
     padding-right:100px;
     margin-left: 45px;
     .comment-wrap{
+        
         .review-header{
             display: flex;
             justify-content: space-between;
+            margin-bottom: 20px;
+            
             h4{
                 color:#35c5f0;
             }
-            .input-wrap{
-                display: flex;
-                input{
-                    border-radius: 10px;
-                    border: 1px solid #bbb;
-                    padding: 3px 5px ;
-                    margin-bottom:20px;
-                }
-                input:focus {outline:none}
-            }
+            
         }
         .comment-input-wrap{
             margin-bottom: 50px;
+            
             .comment-input{
                 color: balck;
 				resize: none;
@@ -109,6 +147,7 @@ const ReviewWrap = styled.div `
 				flex: 1;
 				background-color: white;
 				min-height: 80px;
+                
             }
             .btnwrap{
                 border: 1px solid #35c5f0;
@@ -118,6 +157,7 @@ const ReviewWrap = styled.div `
                 background-color: #35c5f0;
                 display: flex;
                 justify-content: flex-end;
+                
                 .addbtn{
                     cursor:pointer;
                     border: 0;
@@ -132,16 +172,34 @@ const ReviewWrap = styled.div `
             }
             .comment-write-wrap{
                     margin-bottom:50px;
-                    .commet-write-title{
+                    
+                    .comment-write-title{
                         
-                            .user-commet-wrap{
-                                
+                            .user-comment-wrap{
+                            
+                                .user-comment{
+                                    
+                                }
+                                .user-time-btn{
+                                    display: flex;
+                                    justify-content: space-between;
+                                    .modal-pw{
+                                        width: 200px;
+                                        height: 200px;
+                                    }
+                                    
                                     .usertime{
-                                            margin-bottom: 20px;
-                                             display: flex;
+                                            margin-bottom: 5px;
+                                            
+                                }    
+                                          
                         }
                     }
+                    
                 }
+                
             }
+            
         }
+        
 `

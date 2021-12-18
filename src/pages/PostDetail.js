@@ -24,6 +24,7 @@ const PostDetail = (props) => {
 
   const store = 
     {
+
       images: itemDetail.images && `${itemDetail.images[0]}`,
       productsId: `${productsId}`,
       brandName: `${itemDetail.brandName}`,
@@ -32,7 +33,7 @@ const PostDetail = (props) => {
       color: `${colorIdx}`,
       size: `${sizeIdx}`,
     }
-  ;
+  
   const newId = Math.random().toString(36).substr(2,16);
   const setStorageItem = (name, item) => {
     localStorage.setItem(name, JSON.stringify(item));

@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const CartItem = () => {
 
+
 const [cartItem,setCartItem] = useState([]);
 
 
@@ -35,6 +36,7 @@ const [cartItem,setCartItem] = useState([]);
                 <div className='img-item-wrap'>
                     <img className='item-img'src={cartItem[idx].images} alt=''/>
                     <div className='title-delivery-wrap'>
+
                         <text className='title-name'>{cartItem[idx].brandName}</text>
                         <img src={x} alt='' style={{cursor: "pointer"}} />
                         {/* onClick={()=>cartItem[idx] && localStorage.removeItem('cartItem[idx]')} */}
