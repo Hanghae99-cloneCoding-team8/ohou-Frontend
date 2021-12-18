@@ -1,10 +1,11 @@
-import { text } from 'body-parser';
 import React from 'react';
 import styled from 'styled-components';
 import Grid from '../elements/Grid';
 import CartItem from '../components/CartItem';
 
 const Cart = () => {
+
+    
     return (
     <Body>
         <Grid is_container='is_container'>

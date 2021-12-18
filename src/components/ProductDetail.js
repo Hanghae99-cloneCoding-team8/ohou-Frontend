@@ -42,7 +42,6 @@ const ProductDetail = ({itemDetail}) => {
             <div>
             {itemDetail.details &&
                 itemDetail.details.map((i, idx) => {
-                
                   return (
                     <div
                       key={i.id+"detail"}
@@ -54,28 +53,21 @@ const ProductDetail = ({itemDetail}) => {
             </div>
           </div>
 
-          <div className="product-selling-detail-sidebar">
-            <div>
+          <SideBar>
             <div className="option-box">
               <div
                 style={{
                   padding: "20px 20px",
                   display: "flex",
                   flexDirection: "column",
-                  width: "100%",
-                }}
-              >
+                  width: "100%",}}>
                 {itemDetail.option && (
                   <select
-                    onChange={(e) => {
-                      setColorIdx(e.target.value);
-                      console.log(e.target.value);
-                    }}
-                    className="selectbox-option"
-                  >
-                    <option value="" disabled>
-                      컬러
-                    </option>
+                    onChange={(e) => {setColorIdx(e.target.value);}} 
+                    className="selectbox-option">
+
+                      <option value="" disabled>컬러</option>
+
                     {itemDetail.option[0].detail.map((color, idx) => {
                       return (
                         <option key={idx + "color"} value={color} name="color">
@@ -92,12 +84,9 @@ const ProductDetail = ({itemDetail}) => {
                     onChange={(e) => {
                       setSizeIdx(e.target.value);
                       console.log(e.target.value);
-                    }}
-                    className="selectbox-option"
-                  >
-                    <option value="" disabled>
-                      사이즈
-                    </option>
+                    }} className="selectbox-option">
+                    <option value="" disabled>사이즈</option>
+
                     {itemDetail.option[1].detail.map((size, idx) => {
                       return (
                         <option key={idx + "size"} value={size} name="size">
@@ -138,10 +127,9 @@ const ProductDetail = ({itemDetail}) => {
               <button className="buy-btn">바로구매</button>
             </div>
             
-          </div>
-        </div>
-      </Wrap>
-      <Comment/>
+          </SideBar>
+        </Wrap>
+      <Comment itemDetail={itemDetail}/>
     </>
   );
 };
@@ -155,7 +143,6 @@ const NavBar = styled.div`
   top:80px;
 
   .navbar {
-    
     align-items: left;
     display: block;
     width: 66.6666%;
@@ -188,12 +175,13 @@ const NavBar = styled.div`
 const Wrap = styled.div`
   display: flex;
   height : auto;
+  flex-flow: row nowrap;
   margin:0 15%;
   
 
   .product-selling-detail {
     
-    width: 1500px;
+    width: 70%;
     padding: 0px 20px;
     height: auto;
     display: block;
@@ -204,94 +192,85 @@ const Wrap = styled.div`
       width:100%;
       height:100%;
       object-fit:cover;
-
   }
-
-  
-  .product-selling-detail-sidebar {
-    padding: 20px 30px;
-    position:sticky;
-    box-sizing: border-box;
-    top:0px;
-    height:581px;
-   
-    @media screen and (max-width: 1029px) {
-    display:none;
-    }
-    .price {
-    position: fixed;
-    bottom: 0;
-    width:200px;
-    color: black;
-    margin-bottom:70px; 
-    text-align: right !important;
-  }
-  .price  {
-    margin-bottom: 150px;
-    text-align: right !important;
-  }
- 
-  .order-info-box {
-      width: 285px;
-      margin: 8px 0px 8px 0px;
-      padding: 10px 10px;
-      background-color: #f5f5f5;
-      .order-info-text {
-        font-size: 13px;
-        line-height: 20px;
-        color: #424242;
-      }
-    }
-    .btn{
-      position: sticky;
-    width:280px;
-    bottom: 0px;
-    margin-bottom: 50px;
-    color: white;
-    text-align: center;
-    .cart-btn{
-    padding : 13px 10px 14px; 
-    width: 116px;
-    height: 55px;
-    margin: 10px 20px 10px 0px;
-    background-color: white;
-    border: 1px solid #35c5f0;
-    border-radius:5px;
-    color : #35c5f0;
-    cursor:pointer;
-    font-weight: 700;
-    font-size:1.1em;
-      }
-  .buy-btn{
-    font-size:1.1em;
-    font-weight: 700;
-    cursor:pointer;
-    border-radius:5px;
-    color:#fff;
-    border: 1px solid transparent;
-    background-color: #35c5f0;
-    padding : 13px 10px 14px; 
-    width: 116px;
-    height: 55px;
-      }
-  }
- 
-  .selectbox-option {
-    padding: 0px 30px 0px 15px;
-    margin-bottom: 10px;
-    width: 20vw;
-    height: 40px;
-    .focus {
-      outline: none;
-      color: #35c5f0;
-        }
-      }
-  }
- 
 `;
 ProductDetail.defaultProps ={
   images : "",
   price : "57000",
    
 }
+const SideBar= styled.div`
+  position: sticky;
+  height: 400px;
+  box-sizing: border-box;
+  top: 145px;
+  width: 20vw;
+  
+  
+  .order-info-box {
+      width: 18vw;
+      margin: 8px 0px 8px 0px;
+      padding: 10px 10px;
+      background-color: #f5f5f5;
+
+      .order-info-text {
+        font-size: 13px;
+        line-height: 20px;
+        color: #424242;
+      }
+    }
+    
+  .selectbox-option {
+    padding: 0px 30px 0px 15px;
+    margin-bottom: 10px;
+    width: 18vw;
+    height: 40px;
+    .focus {
+      outline: none;
+      color: #35c5f0;
+        }
+      }
+
+  @media screen and (max-width: 1029px) {
+  display:none;
+  }
+  .price {
+  width:240px;
+  color: black;
+  margin : 260px 0px 10px 30px;
+  
+}
+  .btn{
+  bottom:60px;
+  width:300px;
+  color: white;
+  text-align: center;
+
+  .cart-btn{
+  padding : 13px 10px 14px; 
+  width: 116px;
+  height: 55px;
+  margin: 10px 20px 10px 0px;
+  background-color: white;
+  border: 1px solid #35c5f0;
+  border-radius:5px;
+  color : #35c5f0;
+  cursor:pointer;
+  font-weight: 700;
+  font-size:1.1em;
+    }
+.buy-btn{
+  font-size:1.1em;
+  font-weight: 700;
+  cursor:pointer;
+  border-radius:5px;
+  color:#fff;
+  border: 1px solid transparent;
+  background-color: #35c5f0;
+  padding : 13px 10px 14px; 
+  width: 116px;
+  height: 55px;
+    }
+}
+`; 
 export default ProductDetail;
