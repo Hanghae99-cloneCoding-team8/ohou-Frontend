@@ -1,32 +1,53 @@
 import React from 'react';
 import styled from 'styled-components';
-import noimg from '../static/no-image.png'
 import x from '../static/clear.svg'
+import { useState } from 'react';
 
 const CartItem = () => {
+
+const [cartItem,setCartItem] = useState([]);
+
+
+      const getProducts= () => {
+        let array=[];
+        for(let i=0; i<localStorage.length; i++) {
+            let key = localStorage.key(i);
+            let getKey = JSON.parse(localStorage.getItem(key));
+            array.push(getKey);
+            setCartItem(array);
+            };
+      };
+
+      React.useEffect(() => {
+        getProducts();
+      }, []);
+
     return (
-        <CartItemWrap>
-            
+        <>   
+        {cartItem && cartItem.map((c, idx) => {
+              return (
+                <CartItemWrap key={cartItem[idx].productsId}>
             <div className='cart-title-wrap'>
-                <h1>brandname</h1>
+                <h1>{cartItem[idx].brandName}</h1>
             </div>
 
             <div className='cart-body-wrap'>
                 <div className='img-item-wrap'>
-                    <img className='item-img'src={noimg} alt=''/>
+                    <img className='item-img'src={cartItem[idx].images} alt=''/>
                     <div className='title-delivery-wrap'>
-                        <text className='title-name'>[베이직톤] [오늘의딜/5%쿠폰] 노스베어 프리미엄 10mm 라셀 극세사차렵이불 SS/Q/K/LK</text>
-                        <img src={x} alt=''/>
+                        <text className='title-name'>{cartItem[idx].brandName}</text>
+                        <img src={x} alt='' style={{cursor: "pointer"}} />
+                        {/* onClick={()=>cartItem[idx] && localStorage.removeItem('cartItem[idx]')} */}
                         <text >무료배송 | 일반택배</text>
                     </div>
                 </div>
 
                 <div className='option-item-wrap'>
                     <div className='option-title'>
-                        <text>색상+사이즈</text>
+                        <text>{cartItem[idx].color} + {cartItem[idx].size}</text>
                     </div>
                     <div className='select-totalprice-wrap'>
-                        <select className='select-wrap'>
+                        <select className='select-wrap'  >
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -38,7 +59,8 @@ const CartItem = () => {
                             <option>9</option>
                             <option>10</option>
                         </select>
-                        <text className='total-price'>449,000</text>
+                        {/* 끔찍한 혼종코드.. */}
+                        <text className='total-price'>{cartItem[idx].price}원</text>
                     </div>
                 </div>
             </div>
@@ -47,12 +69,16 @@ const CartItem = () => {
                 <h1>배송비 무료</h1>
             </div>
         </CartItemWrap>
+              );
+            })}
+        </>
     );
 };
 
 export default CartItem;
 
 const CartItemWrap = styled.div`
+margin: 10px 0px;
 .cart-title-wrap{
             display: flex;
             width: 695px;

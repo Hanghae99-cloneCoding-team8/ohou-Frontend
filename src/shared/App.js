@@ -12,7 +12,7 @@ import Cart from '../pages/Cart'
 const showHeader = ({pathname})=> {
   if(pathname === './login' || pathname ==='./signup'){
     return false
-  }else {
+  } else {
     return true
   }
 }

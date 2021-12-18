@@ -1,8 +1,21 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Grid from '../elements/Grid';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { actionCreators as commentActions } from '../redux/modules/comment';
 
-const Comment = () => {
+const Comment = ({itemDetail}) => {
+
+    const dispatch = useDispatch();
+    const [content,setContent]= useState("");
+    const [password,setPassword] = useState("");
+    console.log(content);
+    const addComment = (productId)=> {
+        dispatch(commentActions.addCommentAction(content,password,productId));
+    };
+    const productId = itemDetail.id
+    
+
     return (
         <Grid is_container="is_container">
         <ReviewWrap>
@@ -12,14 +25,15 @@ const Comment = () => {
                         <h4>상품 리뷰</h4>
                         <div className='input-wrap'>
                             <div className='input-pw'>
-                                <input placeholder='비밀번호'/>
+                                <input placeholder='비밀번호' onChange ={(e) =>{setPassword(e.target.value);}}/>
                             </div>
                         </div>
                     </div>
                     <div className='comment-input-wrap'>
-                        <textarea className='comment-input' placeholder='당신의 생각을 표현해보세요.'/>
+                        <textarea className='comment-input' placeholder='당신의 생각을 표현해보세요.' 
+                        onChange ={(e) =>{setContent(e.target.value);}}/>
                         <div className='btnwrap'>
-                            <button className='addbtn'>
+                            <button className='addbtn' onClick={()=> {addComment(productId);}}>
                                 작성
                             </button>
                         </div>
@@ -28,96 +42,6 @@ const Comment = () => {
                         <div className='comment-write-title'>
                             <p>댓글1개</p>
                             <hr/>
-                            <div className='user-commet-wrap'>
-                                <div className='usertime'>
-                                    <text
-                                        style={{
-                                            fontSize: '15px',
-                                            fontStyle: 'bold',
-                                            marginRight: "10px"
-                                        }}>username</text>
-                                    <text
-                                        style={{
-                                            fontSize: '10px'
-                                        }}>6시간전</text>
-                                </div>
-                                <div className='user-comment'>
-                                    <text>망한집입니다</text>
-                                </div>
-                                <hr/>
-                            </div>
-                            <div className='user-commet-wrap'>
-                                <div className='usertime'>
-                                    <text
-                                        style={{
-                                            fontSize: '15px',
-                                            fontStyle: 'bold',
-                                            marginRight: "10px"
-                                        }}>username</text>
-                                    <text
-                                        style={{
-                                            fontSize: '10px'
-                                        }}>6시간전</text>
-                                </div>
-                                <div className='user-comment'>
-                                    <text>망한집입니다</text>
-                                </div>
-                                <hr/>
-                            </div>
-                            <div className='user-commet-wrap'>
-                                <div className='usertime'>
-                                    <text
-                                        style={{
-                                            fontSize: '15px',
-                                            fontStyle: 'bold',
-                                            marginRight: "10px"
-                                        }}>username</text>
-                                    <text
-                                        style={{
-                                            fontSize: '10px'
-                                        }}>6시간전</text>
-                                </div>
-                                <div className='user-comment'>
-                                    <text>망한집입니다</text>
-                                </div>
-                                <hr/>
-                            </div>
-                            <div className='user-commet-wrap'>
-                                <div className='usertime'>
-                                    <text
-                                        style={{
-                                            fontSize: '15px',
-                                            fontStyle: 'bold',
-                                            marginRight: "10px"
-                                        }}>username</text>
-                                    <text
-                                        style={{
-                                            fontSize: '10px'
-                                        }}>6시간전</text>
-                                </div>
-                                <div className='user-comment'>
-                                    <text>망한집입니다</text>
-                                </div>
-                                <hr/>
-                            </div>
-                            <div className='user-commet-wrap'>
-                                <div className='usertime'>
-                                    <text
-                                        style={{
-                                            fontSize: '15px',
-                                            fontStyle: 'bold',
-                                            marginRight: "10px"
-                                        }}>username</text>
-                                    <text
-                                        style={{
-                                            fontSize: '10px'
-                                        }}>6시간전</text>
-                                </div>
-                                <div className='user-comment'>
-                                    <text>망한집입니다</text>
-                                </div>
-                                <hr/>
-                            </div>
                             <div className='user-commet-wrap'>
                                 <div className='usertime'>
                                     <text
@@ -195,6 +119,7 @@ const ReviewWrap = styled.div `
                 display: flex;
                 justify-content: flex-end;
                 .addbtn{
+                    cursor:pointer;
                     border: 0;
                     background-color: #35c5f0;
                     color: white;
