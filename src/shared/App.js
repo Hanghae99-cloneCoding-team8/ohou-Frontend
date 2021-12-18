@@ -13,7 +13,7 @@ import PwBtn from '../components/PwBtn';
 const showHeader = ({pathname})=> {
   if(pathname === './login' || pathname ==='./signup'){
     return false
-  }else {
+  } else {
     return true
   }
 }

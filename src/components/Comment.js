@@ -1,20 +1,31 @@
+
 import React, {useState} from 'react';
 import Grid from '../elements/Grid';
 import styled from 'styled-components';
 import {HiOutlinePencilAlt} from 'react-icons/hi'
 import Modal from 'react-modal'
 import PwBtn from './PwBtn';
+import { actionCreators as commentActions } from '../redux/modules/comment';
 
-const Comment = () => {
-
+const Comment = ({itemDetail}) => {
+    const dispatch = useDispatch();
+    const [content,setContent]= useState("");
+    const [password,setPassword] = useState("");
+    console.log(content);
+    const addComment = (productId)=> {
+        dispatch(commentActions.addCommentAction(content,password,productId));
+    };
+    const productId = itemDetail.id
+  
+  
     const [modalIsOpen, setModalIsOpen] = useState(false);
-
     const openModal = () => {
         setModalIsOpen(true)
     }
     const closeModal = () => {
         setModalIsOpen(false)
     }
+
 
     return (
         <Grid is_container="is_container">
@@ -24,11 +35,17 @@ const Comment = () => {
                     <div className='review-header'>
                         <h4>상품 리뷰</h4>
 
+                        <div className='input-wrap'>
+                            <div className='input-pw'>
+                                <input placeholder='비밀번호' onChange ={(e) =>{setPassword(e.target.value);}}/>
+                            </div>
+                        </div>
                     </div>
                     <div className='comment-input-wrap'>
-                        <textarea className='comment-input' placeholder='당신의 생각을 표현해보세요.'/>
+                        <textarea className='comment-input' placeholder='당신의 생각을 표현해보세요.' 
+                        onChange ={(e) =>{setContent(e.target.value);}}/>
                         <div className='btnwrap'>
-                            <button className='addbtn'>
+                            <button className='addbtn' onClick={()=> {addComment(productId);}}>
                                 작성
                             </button>
                         </div>
@@ -79,6 +96,7 @@ const Comment = () => {
                                     }
 
                                 </div>
+
 
                                 <div className='user-comment'>
                                     <text>망한집입니다</text>
@@ -141,6 +159,7 @@ const ReviewWrap = styled.div `
                 justify-content: flex-end;
                 
                 .addbtn{
+                    cursor:pointer;
                     border: 0;
                     background-color: #35c5f0;
                     color: white;

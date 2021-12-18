@@ -3,9 +3,10 @@ import styled, { keyframes } from 'styled-components';
 import Grid from '../elements/Grid';
 import CartItem from '../components/CartItem';
 
-const Cart = (props) => {
-    
 
+const Cart = () => {
+
+    
     return (
     <Body>
         <Grid is_container='is_container'>

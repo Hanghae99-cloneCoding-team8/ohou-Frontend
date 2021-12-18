@@ -12,6 +12,7 @@ const PostDetail = (props) => {
   const [sizeIdx, setSizeIdx] = useState();
   const [modalVisible, setModalVisible] = useState(false);
 
+
   const openModal = () => {
     setModalVisible(true);
   };
@@ -23,15 +24,17 @@ const PostDetail = (props) => {
 
   const store = 
     {
-      productsId:`${productsId}`,
+
+      images: itemDetail.images && `${itemDetail.images[0]}`,
+      productsId: `${productsId}`,
       brandName: `${itemDetail.brandName}`,
       title: `${itemDetail.title}`,
       price: itemDetail.price && `${itemDetail.price.toLocaleString()}`,
       color: `${colorIdx}`,
       size: `${sizeIdx}`,
     }
-  ;
-
+  
+  const newId = Math.random().toString(36).substr(2,16);
   const setStorageItem = (name, item) => {
     localStorage.setItem(name, JSON.stringify(item));
   };
@@ -178,7 +181,7 @@ const PostDetail = (props) => {
                 <button
                   onClick={() =>
                     colorIdx && sizeIdx
-                      ? setStorageItem(`${productsId}`, store) && { openModal }
+                      ? setStorageItem(newId, store) && { openModal }
                       : alert("옵션 선택후에 버튼을 클릭해 주세요.")
                   }
                   className="cart"

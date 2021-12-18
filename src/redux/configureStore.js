@@ -2,13 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
+import Comment from "./modules/comment";
 
 //history 객체 만들기
 export const history = createBrowserHistory();
 
 //root reducer 만들기 ( 라우터와 히스토리 연결시켜주기 -> 그럼 이제 스토어에 브라우저 히스토리가 다 저장된다)
 const rootReducer = combineReducers({
-
+  comment:Comment,
   router: connectRouter(history),
 });
 
