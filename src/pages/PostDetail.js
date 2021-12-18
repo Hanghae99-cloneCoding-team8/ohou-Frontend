@@ -21,15 +21,16 @@ const PostDetail = (props) => {
 
   const productsId = props.match.params.id;
 
-  const store = [
+  const store = 
     {
+      productsId:`${productsId}`,
       brandName: `${itemDetail.brandName}`,
       title: `${itemDetail.title}`,
       price: itemDetail.price && `${itemDetail.price.toLocaleString()}`,
       color: `${colorIdx}`,
       size: `${sizeIdx}`,
-    },
-  ];
+    }
+  ;
 
   const setStorageItem = (name, item) => {
     localStorage.setItem(name, JSON.stringify(item));

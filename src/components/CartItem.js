@@ -4,6 +4,11 @@ import noimg from '../static/no-image.png'
 import x from '../static/clear.svg'
 
 const CartItem = () => {
+
+    let key = localStorage.key("")
+    let getKey = JSON.parse(localStorage.getItem(key));
+    console.log(getKey.title)
+
     return (
         <CartItemWrap>
             
@@ -15,7 +20,7 @@ const CartItem = () => {
                 <div className='img-item-wrap'>
                     <img className='item-img'src={noimg} alt=''/>
                     <div className='title-delivery-wrap'>
-                        <text className='title-name'>[베이직톤] [오늘의딜/5%쿠폰] 노스베어 프리미엄 10mm 라셀 극세사차렵이불 SS/Q/K/LK</text>
+                        <text className='title-name'>{getKey.title}</text>
                         <img src={x} alt=''/>
                         <text >무료배송 | 일반택배</text>
                     </div>

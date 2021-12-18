@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import PostDetail from '../pages/PostDetail';
 import NoCart from '../pages/NoCart'
 import Cart from '../pages/Cart'
+import PwBtn from '../components/PwBtn';
 
 const showHeader = ({pathname})=> {
   if(pathname === './login' || pathname ==='./signup'){
@@ -33,6 +34,7 @@ function App() {
       <Route path='/cart' component={Cart} exact="exact"/>
       <Route path='/nocart' component={NoCart} exact="exact"/> 
       <Route path='/products/:id' component={PostDetail} exact="exact"/>
+      <Route path='/pw' component={PwBtn} exact="exact"/>
       <Footer/>
     </>
   );
