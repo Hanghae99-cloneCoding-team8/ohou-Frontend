@@ -1,6 +1,6 @@
 # 오늘의집 클론코딩
 
-기존 오늘의 집 홈페이지를 서버3(spring) + 프론트2(react) 협업으로 만들어봤습니다.
+기존 오늘의 집 홈페이지를 서버3(spring) + 프론트3(react) 협업으로 만들어봤습니다.
 
 >[와이어프레임](https://www.figma.com/file/fFlzAvcm2FpFSlUiOPCLu4/7조-오늘의-집?node-id=0%3A1)
 
